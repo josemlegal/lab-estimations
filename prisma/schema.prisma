@@ -16,7 +16,7 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now()) @db.Timestamptz(3)
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
   deletedAt DateTime?
   delete_status Boolean @default(false)
 }
@@ -26,7 +26,7 @@ model Project {
   title      String
   description String?
   createdAt DateTime @default(now()) @db.Timestamptz(3)
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
   deletedAt DateTime?
   deleteStatus Boolean @default(false)
 
@@ -39,7 +39,7 @@ model Epic {
   title      String
   tag       String?
   createdAt DateTime @default(now()) @db.Timestamptz(3)
-  updatedAt DateTime? @updatedAt
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
   deletedAt DateTime?
   deleteStatus Boolean @default(false)
 
@@ -55,7 +55,7 @@ model Request {
   title     String
   description String?
   createdAt DateTime @default(now()) @db.Timestamptz(3)
-  updatedAt DateTime? @updatedAt
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
   deletedAt DateTime?
   deleteStatus Boolean @default(false)
 
@@ -74,7 +74,7 @@ model Issue {
   timeForEstimation Float
   estimation Float
   createdAt DateTime @default(now()) @db.Timestamptz(3)
-  updatedAt DateTime? @updatedAt
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
   deletedAt DateTime?
   deleteStatus Boolean @default(false)
 
@@ -88,8 +88,8 @@ model Issue {
 model Comment {
   id        Int     @id @default(autoincrement()) 
   content      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime? @updatedAt
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime? @updatedAt @db.Timestamptz(3)
   deletedAt DateTime?
   deleteStatus Boolean @default(false)
 

@@ -1,0 +1,120 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres@localhost:5432/"
+}
+
+model User {
+  id        Int      @default(autoincrement()) @id
+  name      String?
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+  delete_status Boolean @default(false)
+
+  //Relations
+  projects Project[]
+}
+
+model Project {
+  id        Int      @default(autoincrement()) @id
+  title      String
+  description String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deletedAt DateTime?
+  deleteStatus Boolean @default(false)
+  //Relations
+  user User @relation(fields: [userId], references: [id]) 
+  userId Int   
+
+  epics Epic[]
+
+}
+
+model Epic {
+  id        Int      @default(autoincrement()) @id
+  title      String
+  tag       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+  deleteStatus Boolean @default(false)
+
+  //Relations
+  project Project @relation(fields: [projectId], references: [id])
+  projectId Int
+
+  requests Request[]
+
+}
+
+model Request {
+  id        Int      @default(autoincrement()) @id
+  title     String
+  description String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+  deleteStatus Boolean @default(false)
+
+  //Relations
+  epic Epic @relation(fields: [epicId], references: [id])
+  epicId Int
+
+  issues Issue[]
+  comments Comment[]
+}
+
+model Issue {
+  id        Int      @default(autoincrement()) @id
+  title     String
+  description String?
+  timeForEstimation Float
+  estimation Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+  deleteStatus Boolean @default(false)
+  //Relations
+
+  request Request @relation(fields: [requestId], references: [id])
+  requestId Int
+
+  comments Comment[]
+}
+
+model Comment {
+  id        Int      @default(autoincrement()) @id
+  content      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+  deleteStatus Boolean @default(false)
+
+  //Relations
+  request Request @relation(fields: [requestId], references: [id])
+  requestId Int
+
+  issue Issue @relation(fields: [issueId], references: [id])
+  issueId Int
+  
+  commentTypes CommentType[]
+}
+
+model CommentType {
+  id        Int      @default(autoincrement()) @id
+  type      String
+
+  comment Comment @relation(fields: [commentId], references: [id])
+  commentId Int
+}
+

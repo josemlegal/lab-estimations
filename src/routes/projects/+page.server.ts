@@ -1,5 +1,5 @@
 import { fail, type Actions, type ServerLoad } from '@sveltejs/kit';
-import { prisma } from '../../lib/server/prisma';
+import { prisma } from '$lib/server/prisma';
 
 export const load: ServerLoad = async () => {
 	return {

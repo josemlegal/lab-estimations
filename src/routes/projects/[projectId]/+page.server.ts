@@ -30,6 +30,7 @@ export const load: ServerLoad = async ({ params }) => {
 export const actions: Actions = {
 	'update-project': async ({ request, params }) => {
 		console.log('Ejecute updateProject');
+		console.log('id: ', params.projectId);
 		const { title, description } = Object.fromEntries(await request.formData()) as {
 			title: string;
 			description: string;
@@ -49,7 +50,6 @@ export const actions: Actions = {
 			console.error(err);
 			return fail(500, { message: 'Could not update the project' });
 		}
-
 		return {
 			status: 201
 		};

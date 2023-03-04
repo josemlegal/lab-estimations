@@ -20,11 +20,8 @@
 			<!-- <form action="?/deleteproject&id={project.id}" method="POST">
 					<button type="submit" class="outline secondary">Go to Epics</button>
 				</form> -->
-			<a
-				href="?/updateProject{project.id}"
-				role="button"
-				class="outline constrast"
-				style="width: 100%;">Edit project</a
+			<a href="/projects/{project.id}" role="button" class="outline constrast" style="width: 100%;"
+				>Edit project</a
 			>
 		{/each}
 	</div>

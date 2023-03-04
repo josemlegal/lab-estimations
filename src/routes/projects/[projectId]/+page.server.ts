@@ -11,6 +11,8 @@ export const load: ServerLoad = async ({ params }) => {
 		if (!project) {
 			throw error(404, { message: 'Project not found' });
 		}
+		console.log('Server load...');
+		console.log(`Proyecto: ${project.title}`);
 		return project;
 	};
 
@@ -21,6 +23,7 @@ export const load: ServerLoad = async ({ params }) => {
 
 export const actions: Actions = {
 	updateProject: async ({ request, params }) => {
+		console.log('Ejecute updateProject');
 		const { title, description } = Object.fromEntries(await request.formData()) as {
 			title: string;
 			description: string;

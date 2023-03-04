@@ -11,20 +11,21 @@
 	<div>
 		<h2>Projects:</h2>
 		{#each projects as project}
-			<project>
-				<header>
-					{project.title}
-				</header>
-				<p>
-					{project.description}
-				</p>
-				<form action="?/deleteproject&id={project.id}" method="POST">
+			<header>
+				{project.title}
+			</header>
+			<p>
+				{project.description}
+			</p>
+			<!-- <form action="?/deleteproject&id={project.id}" method="POST">
 					<button type="submit" class="outline secondary">Go to Epics</button>
-				</form>
-				<a href="/project/{project.id}" role="button" class="outline constrast" style="width: 100%;"
-					>Edit project</a
-				>
-			</project>
+				</form> -->
+			<a
+				href="?/updateProject{project.id}"
+				role="button"
+				class="outline constrast"
+				style="width: 100%;">Edit project</a
+			>
 		{/each}
 	</div>
 	<form action="?/createProject" method="POST">

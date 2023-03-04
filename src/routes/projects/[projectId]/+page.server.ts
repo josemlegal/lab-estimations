@@ -1,11 +1,17 @@
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
+import type { Project } from '@prisma/client';
 
 export const load: ServerLoad = async ({ params }) => {
 	const getProject = async () => {
-		const project = await prisma.project.findUnique({
+		const project: Project = await prisma.project.findUnique({
 			where: {
 				id: Number(params.projectId)
+			},
+			select: {
+				id: true,
+				title: true,
+				description: true
 			}
 		});
 		if (!project) {
@@ -17,12 +23,12 @@ export const load: ServerLoad = async ({ params }) => {
 	};
 
 	return {
-		project: getProject()
-	};
+		project: await getProject()
+	} as { project: Project };
 };
 
 export const actions: Actions = {
-	updateProject: async ({ request, params }) => {
+	'update-project': async ({ request, params }) => {
 		console.log('Ejecute updateProject');
 		const { title, description } = Object.fromEntries(await request.formData()) as {
 			title: string;

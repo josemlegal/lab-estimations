@@ -25,7 +25,7 @@
 			>
 		{/each}
 	</div>
-	<form action="?/createProject" method="POST">
+	<form action="?/create" method="POST">
 		<h3>New Project</h3>
 		<label for="title"> Title </label>
 		<input type="text" id="title" name="title" />

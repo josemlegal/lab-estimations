@@ -8,7 +8,7 @@ export const load: ServerLoad = async () => {
 };
 
 export const actions: Actions = {
-	createProject: async ({ request }) => {
+	create: async ({ request }) => {
 		const { title, description } = Object.fromEntries(await request.formData()) as {
 			title: string;
 			description: string;

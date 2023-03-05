@@ -29,5 +29,28 @@ export const actions: Actions = {
 		return {
 			status: 201
 		};
+	},
+	delete: async ({ url }) => {
+		const id = url.searchParams.get('id');
+		console.log('Ejecute deleteProject');
+		console.log('id: ', id);
+
+		try {
+			await prisma.project.update({
+				where: {
+					id: Number(id)
+				},
+				data: {
+					deleteStatus: true,
+					deletedAt: new Date()
+				}
+			});
+		} catch (err) {
+			console.error(err);
+			return fail(500, { message: 'Could not delete the project' });
+		}
+		return {
+			status: 201
+		};
 	}
 };

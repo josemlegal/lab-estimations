@@ -28,14 +28,19 @@
 								href="/projects/{project.id}"
 								role="button"
 								class="outline constrast"
-								style="width: 100%;">Edit project</a
+								style="width: 100%;">Edit</a
 							>
-							<a
-								href="/projects/{project.id}"
+
+							<form action="/projects?/delete&id={project.id}" method="POST">
+								<button type="submit"> eliminate krj </button>
+							</form>
+
+							<!-- <a
+								href="/projects/{project.id}?/delete"
 								role="button"
 								class="outline constrast"
-								style="width: 100%;">Edit project</a
-							>
+								style="width: 100%;">Delete</a
+							> -->
 						</div>
 					</footer>
 				</article>

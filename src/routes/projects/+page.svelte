@@ -1,11 +1,23 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import CreateProjectForm from '$lib/components/CreateProjectForm.svelte';
+	import '@picocss/pico';
+	import type { Project } from '$lib/types/project';
 
 	export let data: PageData;
 
 	$: ({ projects } = data);
-	import '@picocss/pico';
-	import CreateProjectForm from '$lib/components/CreateProjectForm.svelte';
+
+	const onDelete = async (project: Project) => {
+		const response = await confirm('Are you sure you want to delete this project?');
+
+		if (response) {
+			await fetch(`/api/projects?id=${project.id}`, {
+				method: 'DELETE'
+			});
+			window.location.reload();
+		}
+	};
 </script>
 
 <main class="container">
@@ -31,9 +43,15 @@
 								style="width: 100%;">Edit</a
 							>
 
-							<form action="/projects?/delete&id={project.id}" method="POST">
-								<button type="submit" class="outline constrast"> Delete </button>
-							</form>
+							<button
+								on:click={() => {
+									onDelete(project);
+								}}
+								type="button"
+								class="outline constrast"
+							>
+								Delete
+							</button>
 						</div>
 					</footer>
 				</article>

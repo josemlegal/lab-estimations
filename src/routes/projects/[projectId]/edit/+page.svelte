@@ -19,7 +19,7 @@
 </script>
 
 <main class="container">
-	<form action="?/update-project" method="POST">
+	<form action="/projects/{project.id}?/update-project" method="POST">
 		<h3>Editing: {project.title}</h3>
 		<label for="title"> Title </label>
 		<input type="text" id="title" name="title" value={project.title} />

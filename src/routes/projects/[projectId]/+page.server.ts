@@ -30,7 +30,8 @@ const getProject = async (projectId: number) => {
 const getEpics = async (projectId: number) => {
 	const epics: Epic[] = await prisma.epic.findMany({
 		where: {
-			projectId: projectId
+			projectId: projectId,
+			deleteStatus: false
 		},
 		select: {
 			id: true,
@@ -65,6 +66,32 @@ export const actions: Actions = {
 			return fail(500, { message: 'Could not create the epic.' });
 		}
 
+		return {
+			status: 201
+		};
+	},
+	'update-project': async ({ request, params }) => {
+		console.log('Ejecute updateProject');
+		console.log('id: ', params.projectId);
+		const { title, description } = Object.fromEntries(await request.formData()) as {
+			title: string;
+			description: string;
+		};
+
+		try {
+			await prisma.project.update({
+				where: {
+					id: Number(params.projectId)
+				},
+				data: {
+					title,
+					description
+				}
+			});
+		} catch (err) {
+			console.error(err);
+			return fail(500, { message: 'Could not update the project' });
+		}
 		return {
 			status: 201
 		};

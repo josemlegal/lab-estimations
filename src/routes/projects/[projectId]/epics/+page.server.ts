@@ -1,4 +1,4 @@
-import type { Epic } from '$lib/types/epics';
+import type { Epic } from '$lib/types/epic';
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 
 export const load: ServerLoad = async ({ params }) => {

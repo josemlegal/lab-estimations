@@ -11,7 +11,7 @@
 		Button
 	} from 'flowbite-svelte';
 	import { goto } from '$app/navigation';
-	import type { Epic } from '$lib/types/epics';
+	import type { Epic } from '$lib/types/epic';
 
 	export let data: PageData;
 

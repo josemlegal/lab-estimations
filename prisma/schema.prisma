@@ -32,6 +32,8 @@ model Project {
 
   //Relations
   epics Epic[]
+  requests Request[]
+  issues Issue[]
 }
 
 model Epic {
@@ -63,6 +65,9 @@ model Request {
   epic Epic? @relation(fields: [epicId], references: [id], onDelete: SetNull)
   epicId Int?
 
+  project Project @relation(fields: [projectId], references: [id])
+  projectId Int
+
   issues Issue[]
   comments Comment[]
 }
@@ -81,6 +86,8 @@ model Issue {
   //Relations
   request Request @relation(fields: [requestId], references: [id])
   requestId Int
+  project Project @relation(fields: [projectId], references: [id])
+  projectId Int
 
   comments Comment[]
 }

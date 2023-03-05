@@ -1,22 +1,19 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import type { Project } from '$lib/types/project';
 	import { goto } from '$app/navigation';
-	import { Badge, Button } from 'flowbite-svelte';
+	import {
+		Badge,
+		Button,
+		Table,
+		TableBody,
+		TableBodyCell,
+		TableBodyRow,
+		TableHead,
+		TableHeadCell
+	} from 'flowbite-svelte';
 
 	export let data: PageData;
-	$: ({ project, epics } = data);
-
-	const onDelete = async (project: Project) => {
-		const response = await confirm('Are you sure you want to delete this project?');
-
-		if (response) {
-			await fetch(`/api/projects?id=${project.id}`, {
-				method: 'DELETE'
-			});
-			goto('/projects');
-		}
-	};
+	$: ({ project, epics, requests } = data);
 </script>
 
 <h1>
@@ -25,7 +22,7 @@
 	<a href="/projects/{project.id}/edit">Edit</a>
 </h1>
 
-<div class="flex flex-row h-4 ">
+<div class="flex flex-row h-4 my-4">
 	{#each epics as epic}
 		<Badge color={epic.tag}>{epic.title}</Badge>
 	{/each}
@@ -38,6 +35,32 @@
 	>
 </div>
 
-<!-- <Modal bind:open={isModalVisible} autoclose title="Create a new epic!"> -->
+<div>
+	<Button
+		on:click={() => {
+			goto(`${project.id}/requests/create`);
+		}}>Add a new Request</Button
+	>
+</div>
 
-<!-- </Modal> -->
+<Table striped={true}>
+	<TableHead>
+		<TableHeadCell>Product name</TableHeadCell>
+	</TableHead>
+	<TableBody tableBodyClass="divide-y">
+		{#each requests as request}
+			<TableBodyRow>
+				<TableBodyCell
+					class="cursor-pointer"
+					on:click={() => {
+						goto(`${project.id}/requests/${request.id}`);
+					}}
+				>
+					<span>
+						{request.title}
+					</span>
+				</TableBodyCell>
+			</TableBodyRow>
+		{/each}
+	</TableBody>
+</Table>

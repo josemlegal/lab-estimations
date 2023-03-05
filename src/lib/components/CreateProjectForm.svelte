@@ -1,4 +1,8 @@
-<form action="?/create" method="POST">
+<script lang="ts">
+	export let actionUrl: string;
+</script>
+
+<form action={actionUrl} method="POST">
 	<h3>New Project</h3>
 	<label for="title"> Title </label>
 	<input type="text" id="title" name="title" />

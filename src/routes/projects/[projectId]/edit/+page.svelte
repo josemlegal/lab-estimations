@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import '@picocss/pico';
 	import type { Project } from '$lib/types/project';
 	import { goto } from '$app/navigation';
 

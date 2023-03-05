@@ -60,8 +60,8 @@ model Request {
   deleteStatus Boolean @default(false)
 
   //Relations
-  epic Epic @relation(fields: [epicId], references: [id])
-  epicId Int
+  epic Epic? @relation(fields: [epicId], references: [id], onDelete: SetNull)
+  epicId Int?
 
   issues Issue[]
   comments Comment[]

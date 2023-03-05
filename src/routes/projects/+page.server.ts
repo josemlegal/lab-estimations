@@ -6,6 +6,9 @@ export const load: ServerLoad = async () => {
 		projects: await prisma.project.findMany({
 			where: {
 				deleteStatus: false
+			},
+			orderBy: {
+				createdAt: 'desc'
 			}
 		})
 	};

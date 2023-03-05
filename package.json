@@ -16,14 +16,19 @@
 		"@sveltejs/kit": "^1.5.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
+		"autoprefixer": "^10.4.7",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^4.0.0",
+		"postcss": "^8.4.14",
+		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
 		"prisma": "^4.10.1",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
+		"svelte-preprocess": "^4.10.7",
+		"tailwindcss": "^3.1.5",
 		"tslib": "^2.4.1",
 		"typescript": "^4.9.3",
 		"vite": "^4.0.0"
@@ -31,6 +36,10 @@
 	"type": "module",
 	"dependencies": {
 		"@picocss/pico": "^1.5.7",
-		"@prisma/client": "^4.10.1"
+		"@popperjs/core": "^2.11.6",
+		"@prisma/client": "^4.10.1",
+		"classnames": "^2.3.2",
+		"flowbite": "^1.6.3",
+		"flowbite-svelte": "^0.30.6"
 	}
 }

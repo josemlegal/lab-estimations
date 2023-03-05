@@ -3,7 +3,11 @@ import { prisma } from '$lib/server/prisma';
 
 export const load: ServerLoad = async () => {
 	return {
-		projects: await prisma.project.findMany()
+		projects: await prisma.project.findMany({
+			where: {
+				deleteStatus: false
+			}
+		})
 	};
 };
 

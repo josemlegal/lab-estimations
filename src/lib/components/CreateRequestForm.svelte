@@ -7,10 +7,9 @@
 </script>
 
 <form action={actionUrl} method="POST">
-	<h3>New Request</h3>
+	<h3>Create New Request</h3>
 	<label for="title"> Title </label>
 	<input type="text" id="title" name="title" />
-	<label for="description"> Description </label>
 	<label for="epic">
 		Epic
 		<select id="epic" name="epic">
@@ -20,6 +19,7 @@
 			{/each}
 		</select>
 	</label>
+	<label for="description"> Description </label>
 	<textarea id="description" name="description" rows={5} />
 	<button type="submit">Add Request</button>
 </form>

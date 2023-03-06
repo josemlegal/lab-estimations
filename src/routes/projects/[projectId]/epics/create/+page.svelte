@@ -19,12 +19,10 @@
 
 <form action="/projects/{$page.params.projectId}/epics?/create" method="POST">
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-		<Label for="epic-title">Title</Label>
+		<label for="title">Title</label>
 		<input bind:value={epicTitle} type="text" name="title" />
-		<Label>
-			Color
-			<Select bind:value={epicColor} items={colors} name="color" />
-		</Label>
+		<label for="color">Color</label>
+		<Select bind:value={epicColor} items={colors} name="color" />
 	</p>
 
 	<Button type="submit" disabled={!epicTitle || !epicColor}>Create</Button>

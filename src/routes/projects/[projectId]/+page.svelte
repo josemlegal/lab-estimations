@@ -18,8 +18,8 @@
 
 <h1>
 	{project.title}
-
 	<a href="/projects/{project.id}/edit">Edit</a>
+	<p class="text-sm">{project.description}</p>
 </h1>
 
 <div class="">
@@ -61,6 +61,18 @@
 					<span>
 						{request.title}
 					</span>
+				</TableBodyCell>
+
+				<TableBodyCell>
+					<span>{request.description}</span>
+				</TableBodyCell>
+
+				<TableBodyCell>
+					<a href="/projects/{project.id}/requests/{request.id}/edit">Edit</a>
+				</TableBodyCell>
+
+				<TableBodyCell>
+					<a href="/projects/{project.id}/requests/{request.id}/delete">Delete</a>
 				</TableBodyCell>
 			</TableBodyRow>
 		{/each}

@@ -22,17 +22,19 @@
 	<a href="/projects/{project.id}/edit">Edit</a>
 </h1>
 
-<div class="flex flex-row h-4 my-4">
+<div class="">
 	{#each epics as epic}
-		<Badge color={epic.tag}>{epic.title}</Badge>
+		<Badge class=" px-2 mx-1" color={epic.tag}>{epic.title}</Badge>
 	{/each}
-	<Button
-		on:click={() => {
-			goto(`/projects/${project.id}/epics`);
-		}}
-		size="md"
-		class="w-32">Go to Epics</Button
-	>
+	<div class="py-2">
+		<Button
+			on:click={() => {
+				goto(`/projects/${project.id}/epics`);
+			}}
+			size="xs"
+			class="w-28">Go to Epics</Button
+		>
+	</div>
 </div>
 
 <div>
@@ -45,7 +47,7 @@
 
 <Table striped={true}>
 	<TableHead>
-		<TableHeadCell>Product name</TableHeadCell>
+		<TableHeadCell>Requests</TableHeadCell>
 	</TableHead>
 	<TableBody tableBodyClass="divide-y">
 		{#each requests as request}

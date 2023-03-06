@@ -12,7 +12,9 @@
 	<input type="text" id="title" name="title" />
 	<label for="description"> Description </label>
 	<label for="epic">
+		Epic
 		<select id="epic" name="epic">
+			<option value="">Unselected</option>
 			{#each epics as epic}
 				<option value={epic.id}>{epic.title}</option>
 			{/each}

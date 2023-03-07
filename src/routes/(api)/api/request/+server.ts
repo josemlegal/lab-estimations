@@ -3,8 +3,6 @@ import { fail, type RequestHandler } from '@sveltejs/kit';
 export const DELETE = (async ({ url }) => {
 	const id = url.searchParams.get('id');
 
-	console.log('si');
-
 	try {
 		await prisma.request.update({
 			where: {

@@ -3,7 +3,6 @@ import { prisma } from '$lib/server/prisma';
 
 export const DELETE = (async ({ url }) => {
 	const id = url.searchParams.get('id');
-	console.log('Ejecute deleteProject', id);
 
 	try {
 		await prisma.project.update({

@@ -57,7 +57,8 @@ async function getRequests(projectId: number) {
 			id: true,
 			title: true,
 			description: true,
-			issues: true
+			issues: true,
+			epicId: true
 		}
 	});
 	if (!requests) {
@@ -69,8 +70,6 @@ async function getRequests(projectId: number) {
 
 export const actions: Actions = {
 	'update-project': async ({ request, params }) => {
-		console.log('Ejecute updateProject');
-		console.log('id: ', params.projectId);
 		const { title, description } = Object.fromEntries(await request.formData()) as {
 			title: string;
 			description: string;
@@ -95,7 +94,6 @@ export const actions: Actions = {
 		};
 	},
 	'create-epic': async ({ request, params }) => {
-		console.log('Ejecute createEpic');
 		const { title, color } = Object.fromEntries(await request.formData()) as {
 			title: string;
 			color: Color;

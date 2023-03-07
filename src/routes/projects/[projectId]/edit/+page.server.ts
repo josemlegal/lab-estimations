@@ -17,8 +17,7 @@ export const load: ServerLoad = async ({ params }) => {
 		if (!project) {
 			throw error(404, { message: 'Project not found' });
 		}
-		console.log('Server load...');
-		console.log(`Proyecto: ${project.title}`);
+
 		return project;
 	};
 

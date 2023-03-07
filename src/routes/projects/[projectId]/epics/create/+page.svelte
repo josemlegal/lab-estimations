@@ -17,14 +17,16 @@
 	];
 </script>
 
-<form action="/projects/{$page.params.projectId}/epics?/create" method="POST">
-	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-		<label for="title">Title</label>
-		<input bind:value={epicTitle} type="text" name="title" />
-		<label for="color">Color</label>
-		<Select bind:value={epicColor} items={colors} name="color" />
-	</p>
-
-	<Button type="submit" disabled={!epicTitle || !epicColor}>Create</Button>
-	<Button btnClass="bg-red-500 text-white">Cancel</Button>
-</form>
+<main class="container">
+	<form action="/projects/{$page.params.projectId}/epics?/create" method="POST">
+		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+			<label for="title">Title</label>
+			<input bind:value={epicTitle} type="text" name="title" />
+			<label for="color">Color</label>
+			<Select bind:value={epicColor} items={colors} name="color" />
+		</p>
+	
+		<Button type="submit" disabled={!epicTitle || !epicColor}>Create</Button>
+		<Button btnClass="bg-red-500 text-white">Cancel</Button>
+	</form>
+</main>

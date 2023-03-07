@@ -9,7 +9,6 @@
 </script>
 
 <main class="container">
-	<div class="grid">
 		<div>
 			<h2>Projects</h2>
 			<Button
@@ -29,5 +28,4 @@
 				</article>
 			{/each}
 		</div>
-	</div>
 </main>

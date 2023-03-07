@@ -6,5 +6,7 @@ export interface Issue {
 	description: string;
 	projectId: number;
 	requestId: number;
+	timeForEstimation: number;
+	estimation: number;
 	comments: Comment[];
 }

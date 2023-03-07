@@ -16,65 +16,68 @@
 	$: ({ project, epics, requests } = data);
 </script>
 
-<h1>
-	{project.title}
-	<a href="/projects/{project.id}/edit">Edit</a>
-	<p class="text-sm">{project.description}</p>
-</h1>
-
-<div class="">
-	{#each epics as epic}
-		<Badge class=" px-2 mx-1" color={epic.tag}>{epic.title}</Badge>
-	{/each}
-	<div class="py-2">
-		<Button
-			on:click={() => {
-				goto(`/projects/${project.id}/epics`);
-			}}
-			size="xs"
-			class="w-28">Go to Epics</Button
-		>
-	</div>
-</div>
-
-<div>
-	<Button
-		on:click={() => {
-			goto(`${project.id}/requests/create`);
-		}}>Add a new Request</Button
-	>
-</div>
-
-<Table striped={true}>
-	<TableHead>
-		<TableHeadCell>Requests</TableHeadCell>
-	</TableHead>
-	<TableBody tableBodyClass="divide-y">
-		{#each requests as request}
-			<TableBodyRow>
-				<TableBodyCell
-					class="cursor-pointer"
+<main class="container">
+		<h1>
+			{project.title}
+			<a href="/projects/{project.id}/edit">Edit</a>
+			<p class="text-sm">{project.description}</p>
+		</h1>
+		
+		<div class="">
+			{#each epics as epic}
+				<Badge class=" px-2 mx-1" color={epic.tag}>{epic.title}</Badge>
+			{/each}
+			<div class="py-2">
+				<Button
 					on:click={() => {
-						goto(`${project.id}/requests/${request.id}`);
+						goto(`/projects/${project.id}/epics`);
 					}}
+					size="xs"
+					class="w-28">Go to Epics</Button
 				>
-					<span>
-						{request.title}
-					</span>
-				</TableBodyCell>
+			</div>
+		</div>
+		
+		<div>
+			<Button
+				on:click={() => {
+					goto(`${project.id}/requests/create`);
+				}}>Add a new Request</Button
+			>
+		</div>
+		
+		<Table striped={true}>
+			<TableHead>
+				<TableHeadCell>Requests</TableHeadCell>
+			</TableHead>
+			<TableBody tableBodyClass="divide-y">
+				{#each requests as request}
+					<TableBodyRow>
+						<TableBodyCell
+							class="cursor-pointer"
+							on:click={() => {
+								goto(`${project.id}/requests/${request.id}`);
+							}}
+						>
+							<span>
+								{request.title}
+							</span>
+						</TableBodyCell>
+		
+						<TableBodyCell>
+							<span>{request.description}</span>
+						</TableBodyCell>
+		
+						<TableBodyCell>
+							<a href="/projects/{project.id}/requests/{request.id}/edit">Edit</a>
+						</TableBodyCell>
+		
+						<TableBodyCell>
+							<a href="/projects/{project.id}/requests/{request.id}/delete">Delete</a>
+						</TableBodyCell>
+					</TableBodyRow>
+				{/each}
+			</TableBody>
+		</Table>
+</main>
 
-				<TableBodyCell>
-					<span>{request.description}</span>
-				</TableBodyCell>
-
-				<TableBodyCell>
-					<a href="/projects/{project.id}/requests/{request.id}/edit">Edit</a>
-				</TableBodyCell>
-
-				<TableBodyCell>
-					<a href="/projects/{project.id}/requests/{request.id}/delete">Delete</a>
-				</TableBodyCell>
-			</TableBodyRow>
-		{/each}
-	</TableBody>
-</Table>

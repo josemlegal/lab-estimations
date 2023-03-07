@@ -69,7 +69,6 @@ model Request {
   projectId Int
 
   issues Issue[]
-  comments Comment[]
 }
 
 model Issue {
@@ -89,7 +88,6 @@ model Issue {
   project Project @relation(fields: [projectId], references: [id])
   projectId Int
 
-  comments Comment[]
 }
 
 model Comment {
@@ -101,11 +99,7 @@ model Comment {
   deleteStatus Boolean @default(false)
 
   //Relations
-  request Request? @relation(fields: [requestId], references: [id])
-  requestId Int?
-
-  issue Issue? @relation(fields: [issueId], references: [id])
-  issueId Int?
+  relationId Int
   
   commentType CommentType @relation(fields: [commentTypeId], references: [id])
   commentTypeId Int

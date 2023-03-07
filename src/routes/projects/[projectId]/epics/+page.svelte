@@ -67,7 +67,7 @@
 
 			<Table striped={true}>
 				<TableHead>
-					<TableHeadCell>Product name</TableHeadCell>
+					<TableHeadCell>Title</TableHeadCell>
 					<TableHeadCell>Color</TableHeadCell>
 					<TableHeadCell>
 						<span class="sr-only"> Edit </span>

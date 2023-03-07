@@ -36,7 +36,6 @@ vite.config.ts.timestamp-*
 # Icon must end with two \r
 Icon
 
-
 # Thumbnails
 ._*
 
@@ -229,4 +228,3 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,node
 
 /prisma/dev.sqlite
-/prisma/migrations

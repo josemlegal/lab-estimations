@@ -39,8 +39,6 @@ export const actions: Actions = {
 	},
 	delete: async ({ url }) => {
 		const id = url.searchParams.get('id');
-		console.log('Ejecute deleteProject');
-		console.log('id: ', id);
 
 		try {
 			await prisma.project.update({

@@ -3,7 +3,7 @@ import type { Epic } from '$lib/types/epic';
 import type { Project } from '$lib/types/project';
 import type { Request } from '$lib/types/request';
 
-import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
+import { error, fail, redirect, type Actions, type ServerLoad } from '@sveltejs/kit';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {
@@ -108,9 +108,6 @@ export const actions: Actions = {
 			console.error(err);
 			return fail(500, { message: 'Could not update the project' });
 		}
-		goto(`/projects/${params.projectId}`);
-		return {
-			status: 201
-		};
+		throw redirect(301, `/projects/${params.projectId}`);
 	}
 };

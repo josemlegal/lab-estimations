@@ -21,7 +21,7 @@
 
 		if (response) {
 			try {
-				await fetch(`/api/request?id=${request}`, {
+				await fetch(`/api/request?id=${request.id}`, {
 					method: 'DELETE'
 				});
 				window.location.reload();
@@ -83,6 +83,7 @@
 					</span>
 				</TableBodyCell>
 
+				<TableBodyCell />
 				<TableBodyCell />
 
 				<TableBodyCell>

@@ -64,7 +64,6 @@ async function getRequests(projectId: number) {
 	if (!requests) {
 		throw error(404, { message: 'Requests not found' });
 	}
-	console.log(JSON.stringify(requests));
 	return requests;
 }
 

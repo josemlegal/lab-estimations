@@ -64,7 +64,6 @@ async function getRequests(projectId: number) {
 	if (!requests) {
 		throw error(404, { message: 'Requests not found' });
 	}
-	console.log(JSON.stringify(requests));
 	return requests;
 }
 
@@ -83,7 +82,6 @@ async function getRequest(requestId: number) {
 	if (!request) {
 		throw error(404, { message: 'Request not found' });
 	}
-	console.log(JSON.stringify(request));
 	return request;
 }
 

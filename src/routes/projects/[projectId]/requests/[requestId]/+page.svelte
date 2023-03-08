@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
-<h1>{$page.params.requestId}</h1>
+<h1>pagina del request</h1>

@@ -117,9 +117,10 @@ export const actions: Actions = {
 		};
 	},
 	'create-request': async ({ request, params }) => {
-		const { title, description } = Object.fromEntries(await request.formData()) as {
+		const { title, description, epic } = Object.fromEntries(await request.formData()) as {
 			title: string;
 			description: string;
+			epic: string;
 		};
 
 		try {
@@ -127,7 +128,8 @@ export const actions: Actions = {
 				data: {
 					title,
 					description,
-					projectId: Number(params.projectId)
+					projectId: Number(params.projectId),
+					epicId: Number(epic)
 				}
 			});
 		} catch (err) {

@@ -84,6 +84,9 @@
 				</TableBodyCell>
 
 				<TableBodyCell />
+				<span>
+					{request.epicId}
+				</span>
 				<TableBodyCell />
 
 				<TableBodyCell>
@@ -108,3 +111,7 @@
 		{/each}
 	</TableBody>
 </Table>
+
+<h1>
+	json: {JSON.stringify(requests)}
+</h1>

@@ -4,20 +4,20 @@
 	import type { Request } from '$lib/types/request';
 
 	export let data: PageData;
-	$: ({ project, epics, requests } = data);
+	$: ({ project, epics, requests, request } = data);
 </script>
 
-<form method="POST">
-	<h3>Update el requesttttttttttttt</h3>
+<form action="?/update-request" method="POST">
+	<h3>{request.title}</h3>
 	<label for="title"> Title </label>
 	<input type="text" id="title" name="title" />
 	<label for="epic">
 		Epic
 		<select id="epic" name="epic">
 			<option value="">Unselected</option>
-			<!-- {#each epics as epic}
+			{#each epics as epic}
 				<option value={epic.id}>{epic.title}</option>
-			{/each} -->
+			{/each}
 		</select>
 	</label>
 	<label for="description"> Description </label>

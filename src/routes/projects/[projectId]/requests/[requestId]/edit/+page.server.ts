@@ -1,11 +1,16 @@
-import type { Epic, Project } from '@prisma/client';
+import { goto } from '$app/navigation';
+import type { Epic } from '$lib/types/epic';
+import type { Project } from '$lib/types/project';
+import type { Request } from '$lib/types/request';
+
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {
 		project: await getProject(Number(params.projectId)),
 		epics: await getEpics(Number(params.projectId)),
-		requests: await getRequests(Number(params.projectId))
+		requests: await getRequests(Number(params.projectId)),
+		request: await getRequest(Number(params.requestId))
 	};
 };
 const getProject = async (projectId: number) => {
@@ -63,6 +68,25 @@ async function getRequests(projectId: number) {
 	return requests;
 }
 
+async function getRequest(requestId: number) {
+	const request: Request = await prisma.request.findUnique({
+		where: {
+			id: requestId
+		},
+		select: {
+			id: true,
+			title: true,
+			epicId: true,
+			description: true
+		}
+	});
+	if (!request) {
+		throw error(404, { message: 'Request not found' });
+	}
+	console.log(JSON.stringify(request));
+	return request;
+}
+
 export const actions: Actions = {
 	'update-request': async ({ request, params }) => {
 		const { title, description } = Object.fromEntries(await request.formData()) as {
@@ -84,6 +108,7 @@ export const actions: Actions = {
 			console.error(err);
 			return fail(500, { message: 'Could not update the project' });
 		}
+		goto(`/projects/${params.projectId}`);
 		return {
 			status: 201
 		};

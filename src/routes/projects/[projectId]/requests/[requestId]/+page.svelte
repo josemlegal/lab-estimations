@@ -18,7 +18,7 @@
 <main class="container">
 		<h1>
 			{request.title}
-			<a href="/projects/{request.id}/edit">Edit</a>
+			<a href="/projects/{project.id}/requests/{request.id}/edit">Edit</a>
 			<p class="text-sm">{request.description}</p>
 		</h1>
 		
@@ -40,7 +40,7 @@
 						<TableBodyCell
 							class="cursor-pointer"
 							on:click={() => {
-								goto(`${project.id}/requests/${request.id}/issues/${issue.id}`);
+								goto(`${request.id}/issues/${issue.id}`);
 							}}
 						>
 							<span>
@@ -61,7 +61,7 @@
 						</TableBodyCell>
 		
 						<TableBodyCell>
-							<a href="/projects/{project.id}/requests/{request.id}/edit">Edit</a>
+							<a href="/projects/{project.id}/requests/{request.id}/issues/{issue.id}/edit">Edit</a>
 						</TableBodyCell>
 		
 						<TableBodyCell>

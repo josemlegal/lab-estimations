@@ -1,8 +1,6 @@
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-import type { Project } from '$lib/types/project';
-import type { Color, Epic } from '$lib/types/epic';
-import type { Request } from '$lib/types/request';
+import type { Project, Color, Epic, Request } from '$lib/types';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {
@@ -63,14 +61,11 @@ async function getRequests(projectId: number) {
 	if (!requests) {
 		throw error(404, { message: 'Requests not found' });
 	}
-	console.log(JSON.stringify(requests));
 	return requests;
 }
 
 export const actions: Actions = {
 	'update-project': async ({ request, params }) => {
-		console.log('Ejecute updateProject');
-		console.log('id: ', params.projectId);
 		const { title, description } = Object.fromEntries(await request.formData()) as {
 			title: string;
 			description: string;
@@ -95,7 +90,6 @@ export const actions: Actions = {
 		};
 	},
 	'create-epic': async ({ request, params }) => {
-		console.log('Ejecute createEpic');
 		const { title, color } = Object.fromEntries(await request.formData()) as {
 			title: string;
 			color: Color;

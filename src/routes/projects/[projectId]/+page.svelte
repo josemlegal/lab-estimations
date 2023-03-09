@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { goto } from '$app/navigation';
+	import type { Request } from '$lib/types';
 	import {
 		Badge,
 		Button,
@@ -14,6 +15,17 @@
 
 	export let data: PageData;
 	$: ({ project, epics, requests } = data);
+
+	const onDelete = async (request: Request) => {
+		const response = await confirm('Are you sure you want to delete this project?');
+
+		if (response) {
+			await fetch(`/api/projects?id=${project.id}`, {
+				method: 'DELETE'
+			});
+			goto('/projects');
+		}
+	};
 </script>
 
 <main class="container">
@@ -69,11 +81,17 @@
 						</TableBodyCell>
 		
 						<TableBodyCell>
-							<a href="/projects/{project.id}/requests/{request.id}/edit">Edit</a>
+							<button
+							on:click={() => {
+								goto(`${project.id}/requests/${request.id}/edit`);
+							}}>Edit</button>
 						</TableBodyCell>
 		
 						<TableBodyCell>
-							<a href="/projects/{project.id}/requests/{request.id}/delete">Delete</a>
+							<button
+							on:click={() => {
+								goto(`${project.id}/requests/${request.id}/edit`);
+							}}>Delete</button>
 						</TableBodyCell>
 					</TableBodyRow>
 				{/each}

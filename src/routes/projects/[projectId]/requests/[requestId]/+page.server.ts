@@ -1,14 +1,11 @@
 import { error, fail, type Actions, type ServerLoad } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-import type { Issue } from '$lib/types/issue';
-import type { Project } from '$lib/types/project';
-import type { Request } from '$lib/types/request';
-
+import type { Issue, Project, Request } from '$lib/types';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {
 		project: await getProject(Number(params.projectId)),
-        request: await getRequest(Number(params.projectId)),
+        request: await getRequest(Number(params.requestId)),
 		issues: await getIssues(Number(params.requestId))
 	};
 };
@@ -27,12 +24,10 @@ async function getProject(projectId: number) {
 	if (!project) {
 		throw error(404, { message: 'Project not found' });
 	}
-	console.log(JSON.stringify(project));
 	return project;
 }
 
 async function getRequest(requestId: number) {
-    console.log(requestId)
 	const request: Request = await prisma.request.findUnique({
 		where: {
 			id: requestId
@@ -46,7 +41,6 @@ async function getRequest(requestId: number) {
 	if (!request) {
 		throw error(404, { message: 'Request not found' });
 	}
-	console.log(JSON.stringify(request));
 	return request;
 }
 
@@ -67,7 +61,6 @@ async function getIssues(requestId: number) {
 	if (!issues) {
 		throw error(404, { message: 'Requests not found' });
 	}
-	console.log(JSON.stringify(issues));
 	return issues;
 }
 
@@ -92,7 +85,6 @@ export const actions: Actions = {
 				}
 			});
 		} catch (err) {
-			console.log("todo mal loco")
 			console.error(err);
 			return fail(500, { message: 'Could not create the issue.' });
 		}
@@ -100,5 +92,29 @@ export const actions: Actions = {
 		return {
 			status: 201
 		};
+	},
+'update-request': async ({ request, params }) => {
+	const { title, description } = Object.fromEntries(await request.formData()) as {
+		title: string;
+		description: string;
+	};
+
+	try {
+		await prisma.request.update({
+			where: {
+				id: Number(params.requestId)
+			},
+			data: {
+				title,
+				description
+			}
+		});
+	} catch (err) {
+		console.error(err);
+		return fail(500, { message: 'Could not update the request' });
 	}
+	return {
+		status: 201
+	};
+},
 };

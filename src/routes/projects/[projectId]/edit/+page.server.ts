@@ -1,6 +1,6 @@
 import { error, type ServerLoad } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-import type { Project } from '$lib/types/project';
+import type { Project } from '$lib/types';
 
 export const load: ServerLoad = async ({ params }) => {
 	const getProject = async () => {
@@ -17,8 +17,6 @@ export const load: ServerLoad = async ({ params }) => {
 		if (!project) {
 			throw error(404, { message: 'Project not found' });
 		}
-		console.log('Server load...');
-		console.log(`Proyecto: ${project.title}`);
 		return project;
 	};
 

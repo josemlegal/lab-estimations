@@ -30,15 +30,12 @@ export const PUT = (async ({ url, request }) => {
 export const DELETE = (async ({ url }) => {
 	const id = url.searchParams.get('id');
 
-	console.log('si');
-
 	try {
 		await prisma.epic.delete({
 			where: {
 				id: Number(id)
 			}
 		});
-		console.log('pasa');
 
 		return new Response(
 			JSON.stringify({

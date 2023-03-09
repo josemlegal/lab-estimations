@@ -5,7 +5,7 @@ export const DELETE = (async ({ url }) => {
 	const id = url.searchParams.get('id');
 
 	try {
-		await prisma.project.update({
+		await prisma.issue.update({
 			where: {
 				id: Number(id)
 			},
@@ -16,12 +16,12 @@ export const DELETE = (async ({ url }) => {
 		});
 	} catch (err) {
 		console.error(err);
-		return fail(500, { message: 'Could not delete the project' });
+		return fail(500, { message: 'Could not delete the issue' });
 	}
 	return new Response(
 		JSON.stringify({
 			code: 201,
-			message: 'Project deleted'
+			message: 'Issue deleted'
 		})
 	);
 }) as RequestHandler;

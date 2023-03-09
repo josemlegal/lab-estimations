@@ -65,3 +65,35 @@ const getProject = async (projectId: number) => {
 	}
 	return project;
 };
+
+export const actions: Actions = {
+	'create-issue': async ({ request, params }) => {
+		const { title, description, timeForEstimation, estimation } = Object.fromEntries(
+			await request.formData()
+		) as {
+			title: string;
+			description: string;
+			timeForEstimation: string;
+			estimation: string;
+		};
+
+		try {
+			await prisma.issue.create({
+				data: {
+					title,
+					description,
+					timeForEstimation: Number(timeForEstimation),
+					estimation: Number(estimation),
+					requestId: Number(params.requestId)
+				}
+			});
+		} catch (err) {
+			console.error(err);
+			return fail(500, { message: 'Could not create the issue.' });
+		}
+
+		return {
+			status: 201
+		};
+	}
+};

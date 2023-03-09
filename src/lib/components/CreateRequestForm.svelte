@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Epic } from '$lib/types/epic';
+	import type { Epic } from '$lib/types';
 
 	export let actionUrl: string;
 

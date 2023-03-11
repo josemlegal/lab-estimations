@@ -6,4 +6,5 @@ export interface Request {
 	description: string;
 	issues: Issue[];
 	projectId: number;
+	epicId: number;
 }

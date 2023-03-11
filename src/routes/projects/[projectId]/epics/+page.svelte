@@ -40,7 +40,7 @@
 
 		if (response) {
 			try {
-				await fetch(`/api/epics?id=${epic.id}`, {
+				await fetch(`/api/projects/epics?id=${epic.id}`, {
 					method: 'DELETE'
 				});
 				window.location.reload();

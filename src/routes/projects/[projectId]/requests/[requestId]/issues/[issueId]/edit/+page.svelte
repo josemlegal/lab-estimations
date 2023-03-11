@@ -4,16 +4,16 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	$: ({ request, issue } = data);
+	$: ({ request, issue, projectId } = data);
 
 	const onDelete = async (issue: Issue) => {
 		const response = await confirm('Are you sure you want to delete this issue?');
 
 		if (response) {
-			await fetch(`/api/projects/request/issues?id=${issue.id}`, {
+			await fetch(`/api/projects/requests/issues?id=${issue.id}`, {
 				method: 'DELETE'
 			});
-			goto(`${request.id}/requests}`);
+			goto(`/projects/${projectId}/requests/${request.id}`);
 		}
 	};
 </script>

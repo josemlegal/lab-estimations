@@ -75,6 +75,14 @@
 								{request.title}
 							</span>
 						</TableBodyCell>
+
+						<TableBodyCell>
+							{#each epics as epic}
+								{#if epic.id == request.epicId}
+								<Badge class=" px-2 mx-1" color={epic.tag}>{epic.title}</Badge>
+								{/if}
+							{/each}
+						</TableBodyCell>
 		
 						<TableBodyCell>
 							<span>{request.description}</span>
@@ -85,13 +93,6 @@
 							on:click={() => {
 								goto(`${project.id}/requests/${request.id}/edit`);
 							}}>Edit</button>
-						</TableBodyCell>
-		
-						<TableBodyCell>
-							<button
-							on:click={() => {
-								goto(`${project.id}/requests/${request.id}/edit`);
-							}}>Delete</button>
 						</TableBodyCell>
 					</TableBodyRow>
 				{/each}

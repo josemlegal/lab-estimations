@@ -5,7 +5,8 @@ import type { Request, Issue } from '$lib/types';
 export const load: ServerLoad = async ({ params }) => {
 	return {
 		issue: await getIssue(Number(params.issueId)),
-		request: await getRequest(Number(params.requestId))
+		request: await getRequest(Number(params.requestId)),
+		projectId: Number(params.projectId)
 	};
 };
 

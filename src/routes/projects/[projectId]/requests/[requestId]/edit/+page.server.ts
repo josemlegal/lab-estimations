@@ -1,11 +1,12 @@
 import { error, type ServerLoad } from '@sveltejs/kit';
 import { prisma } from '$lib/server/prisma';
-import type { Project, Request } from '$lib/types';
+import type { Project, Request, Epic } from '$lib/types';
 
 export const load: ServerLoad = async ({ params }) => {
 	return {
 		project: await getProject(Number(params.projectId)),
-		request: await getRequest(Number(params.requestId))
+		request: await getRequest(Number(params.requestId)),
+		epics: await getEpics(Number(params.projectId)) 
 	};
 };
 
@@ -46,3 +47,21 @@ const getProject = async (requestId: number) => {
 	console.log(`Proyecto: ${project.title}`);
 	return project as Project;
 }
+
+const getEpics = async (projectId: number) => {
+	const epics: Epic[] = await prisma.epic.findMany({
+		where: {
+			projectId: projectId,
+			deleteStatus: false
+		},
+		select: {
+			id: true,
+			title: true,
+			tag: true
+		}
+	});
+	if (!epics) {
+		throw error(404, { message: 'Epic not found' });
+	}
+	return epics;
+};

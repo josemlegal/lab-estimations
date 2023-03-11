@@ -59,14 +59,14 @@
 						<TableBodyCell>
 							<span>{issue.estimation}</span>
 						</TableBodyCell>
-		
+
 						<TableBodyCell>
-							<a href="/projects/{project.id}/requests/{request.id}/issues/{issue.id}/edit">Edit</a>
+							<button
+							on:click={() => {
+								goto(`${request.id}/issues/${issue.id}/edit`);
+							}}>Edit</button>
 						</TableBodyCell>
 		
-						<TableBodyCell>
-							<a href="/projects/{project.id}/requests/{request.id}/delete">Delete</a>
-						</TableBodyCell>
 					</TableBodyRow>
 				{/each}
 			</TableBody>
